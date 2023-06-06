@@ -78,7 +78,7 @@ int Menu_(){
         printf("\n|----|________________________|");
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
-        scanf("%s", &Entrada);
+        scanf("%s", Entrada);
 
     }while(regexec(&Numeracao_01, Entrada, 0, NULL, 0) && regexec(&Numeracao_02, Entrada, 0, NULL, 0));
     
@@ -117,7 +117,7 @@ int Menu_Algoritmos_(){
         printf("\n|----|________________________________________|");
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
-        scanf("%s", &Entrada);
+        scanf("%s", Entrada);
     }while(regexec(&Numeracao_01, Entrada, 0, NULL, 0) && regexec(&Numeracao_02, Entrada, 0, NULL, 0));
     
     // Transforma o valor da entrada para inteiro.
@@ -194,14 +194,14 @@ void Algoritmos_(){
                 V = Escolher_Vertice_(PARTIDA);
                 W = Escolher_Vertice_(CHEGADA);
                 // Predecessor = Arvore_Geradora_Minima___PRIM_(G, V);
-                Imprimir_Caminho_(Predecessor, V, W);
+                // Imprimir_Caminho_(Predecessor, V, W);
                 break;
             case (KRUSKAL):
 
                 V = Escolher_Vertice_(PARTIDA);
                 W = Escolher_Vertice_(CHEGADA);
                 // Predecessor = Arvore_Geradora_Minima___KRUSKAL_(G);
-                Imprimir_Caminho_(Predecessor, V, W);
+                // Imprimir_Caminho_(Predecessor, V, W);
                 break;
         }
 
