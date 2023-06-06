@@ -125,7 +125,7 @@ void Inserir_Aresta_(Grafo *G, int V, int W, int Peso){
     @ Saida:
     - ( void )
 */
-void Remover_Aresta(Grafo *G, int V, int W){
+void Remover_Aresta_(Grafo *G, int V, int W){
 
     if(G){
 
