@@ -7,8 +7,8 @@
         * UFES   - Universidade Federal do Espirito Santo.
         * CEUNES - Centro universitario Norte do Espirito Santo.
     
-    Este arquivo contem a implementacao de um menu funcional
-    e interativo para auxiliar na contrucao de Grafos, realizacao de
+    Este arquivo contem a implementacao de um menu funcional e
+    interativo para auxiliar na contrucao de Grafos, realizacao de
     consultas e testes com os Grafos.
 */
 
@@ -78,7 +78,7 @@ int Menu_(){
         printf("\n|----|________________________|");
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
-        scanf("%s", &Entrada);
+        scanf("%s", Entrada);
 
     }while(regexec(&Numeracao_01, Entrada, 0, NULL, 0) && regexec(&Numeracao_02, Entrada, 0, NULL, 0));
     
@@ -117,7 +117,7 @@ int Menu_Algoritmos_(){
         printf("\n|----|________________________________________|");
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
-        scanf("%s", &Entrada);
+        scanf("%s", Entrada);
     }while(regexec(&Numeracao_01, Entrada, 0, NULL, 0) && regexec(&Numeracao_02, Entrada, 0, NULL, 0));
     
     // Transforma o valor da entrada para inteiro.
