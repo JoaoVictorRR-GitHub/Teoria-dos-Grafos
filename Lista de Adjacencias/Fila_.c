@@ -12,26 +12,7 @@
     estruturas de vertices.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "Grafos_.h"
-
-#define SEM_FILA    printf("\n|----| [0_0] Voce nao tem uma fila.\n");
-
-
-
-/*<<===================================================================================>>*/
-/*<<===================================================================================>>*/
-
-/*
-    Estrutura representativa
-    de uma fila de vertices.
-*/
-typedef struct{
-    int Size;       // Tamanho da fila.
-    Vertice *First; // Ponteiro para o primeiro vertice da fila.
-    Vertice *Last;  // Ponteiro para o ultimo vertice da fila.
-}Queue;
 
 
 
@@ -81,12 +62,12 @@ void Inserir_Vertice_Fila_(Queue *Fila, int Identificador){
         // Verifica se a fila esta vazia.
         if(Fila->Size == 0){
 
-            Fila->First = Criar_Vertice_(Identificador);
+            Fila->First = Criar_Vertice_(Identificador, 1);
             Fila->Last  = Fila->First;
         }
         else{
             
-            Fila->Last->Prox = Criar_Vertice_(Identificador);
+            Fila->Last->Prox = Criar_Vertice_(Identificador, 1);
             Fila->Last       = Fila->Last->Prox;
         }
 

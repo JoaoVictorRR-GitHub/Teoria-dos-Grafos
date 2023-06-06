@@ -13,7 +13,6 @@
 */
 
 #include "Grafos_.h"
-#include "Fila_.c"
 
 
 
@@ -32,7 +31,7 @@
     @ Saida:
     - ( void )
 */
-void Imprimir_Percurso_Largura_(Grafo *G, int Raiz){
+void Imprimir_Percurso_em_Largura_(Grafo *G, int Raiz){
 
     int *Alcancado        = (int*) calloc(G->Qnt_V, sizeof(int));   // Conjunto de vertices alcancados.
     Queue *Explorados     = Criar_Fila_();                          // Conjunto de vertices explorados.
@@ -192,7 +191,7 @@ void Percurso_em_Profundidade_(Grafo *G, int Raiz, int **Alcancados, Queue *Expl
 
         // Percurso em profundidade recursivo.
         if((*Alcancados)[W->No] == NAO)
-            Percurso_em_Profundidade_(G, W, Alcancados, Explorados);
+            Percurso_em_Profundidade_(G, W->No, Alcancados, Explorados);
 
         W = W->Prox;
     }

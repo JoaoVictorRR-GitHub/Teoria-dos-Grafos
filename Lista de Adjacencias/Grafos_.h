@@ -9,6 +9,7 @@
 #define NAO         0           // False.
 #define SEM_ARESTA  0
 #define INFINITO    INT_MAX/2   // Valor maximo.
+#define SEM_FILA    printf("\n|----| [0_0] Voce nao tem uma fila.\n");
 #define SEM_GRAFO   printf("\n|----| [0_0] Voce nao tem um grafo.\n");
 #define SEM_MEMORIA printf("\n|----| [x_x] Sem memoria disponivel !\n");
 
@@ -47,10 +48,32 @@ void Deletar_Grafo_(Grafo *G);
 
 
 /*<<===================================================================================>>*/
+/*<<===============================>>  ESTRUTURA FILA <<===============================>>*/
+/*<<===================================================================================>>*/
+
+/*
+    Estrutura representativa
+    de uma fila de vertices.
+*/
+typedef struct{
+    int Size;       // Tamanho da fila.
+    Vertice *First; // Ponteiro para o primeiro vertice da fila.
+    Vertice *Last;  // Ponteiro para o ultimo vertice da fila.
+}Queue;
+
+Queue *Criar_Fila_();
+void Inserir_Vertice_Fila_(Queue *Fila, int Identificador);
+int Remover_Vertice_Fila_(Queue *Fila);
+void Imprimir_Fila_(Queue *Fila);
+void Deletar_Fila_(Queue *Fila);
+
+
+
+/*<<===================================================================================>>*/
 /*<<=============================>> PERCURSOS EM GRAFOS <<=============================>>*/
 /*<<===================================================================================>>*/
 
-void Imprimir_Percurso_Largura_(Grafo *G, int Raiz);
+void Imprimir_Percurso_em_Largura_(Grafo *G, int Raiz);
 int  Verificar_Grafo_Bipartido_(Grafo *G, int Raiz);
 void Percurso_em_Profundidade_(Grafo *G, int Raiz, int **Alcancados, Queue *Explorados);
 void Imprimir_Percurso_em_Profundidade_(Grafo *G, int Raiz);

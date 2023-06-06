@@ -17,7 +17,7 @@
 #include "Grafos_.c"
 #include "Percursos_.c"
 #include "Utilitarios_.c"
-#include "Arvore_Geradora_.c"
+// #include "Arvore_Geradora_.c"
 
 // Menu principal.
 #define CRIAR 1
@@ -193,14 +193,14 @@ void Algoritmos_(){
 
                 V = Escolher_Vertice_(PARTIDA);
                 W = Escolher_Vertice_(CHEGADA);
-                Predecessor = Arvore_Geradora_Minima___PRIM_(G, V);
+                // Predecessor = Arvore_Geradora_Minima___PRIM_(G, V);
                 Imprimir_Caminho_(Predecessor, V, W);
                 break;
             case (KRUSKAL):
 
                 V = Escolher_Vertice_(PARTIDA);
                 W = Escolher_Vertice_(CHEGADA);
-                Predecessor = Arvore_Geradora_Minima___KRUSKAL_(G);
+                // Predecessor = Arvore_Geradora_Minima___KRUSKAL_(G);
                 Imprimir_Caminho_(Predecessor, V, W);
                 break;
         }
@@ -250,11 +250,9 @@ int main(){
                         if((V > 0) && (V <= G->Qnt_V) && (W > 0) && (W <= G->Qnt_V)){
                             
                             i++;
-                            if(!Verificar_Adjacencia_(G, V-1, W-1)){
-                                Inserir_Aresta_(G, V-1, W-1, Peso);
-								Inserir_Aresta_(G, W-1, V-1, Peso);
-                                ARESTA_INSERIDA
-                            }
+                            Inserir_Aresta_(G, V-1, W-1, Peso);
+                            Inserir_Aresta_(G, W-1, V-1, Peso);
+                            ARESTA_INSERIDA
                         }
                         else ARESTA_INVALIDA
                     }
@@ -271,12 +269,10 @@ int main(){
                     
                     V = Escolher_Vertice_(PARTIDA);
                     W = Escolher_Vertice_(CHEGADA);
-
-                    if(Verificar_Adjacencia_(G, V, W)){
-                        Remover_Aresta_(G, V, W);
-						Remover_Aresta_(G, W, V);
-                        printf("|----| [0_0] Aresta removida com sucesso !\n");
-                    }
+                    
+                    Remover_Aresta_(G, V, W);
+                    Remover_Aresta_(G, W, V);
+                    printf("|----| [0_0] Aresta removida com sucesso !\n");
                 }
                 else SEM_GRAFO
                 break;
