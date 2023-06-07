@@ -65,12 +65,13 @@ void Imprimir_Percurso_em_Largura_(Grafo *G, int Raiz){
 
         /*  [GRAFOS DESCONEXOS] Verifica se existe
             algum vertice desconexo nao explorado.  */
-        if((Nao_explorados->First == NULL) && (Explorados->Size != G->Qnt_V)){
+        if((Nao_explorados->First == NULL) && (Explorados->Size < G->Qnt_V)){
 
             for(V = 0; V < G->Qnt_V; V++){
 
                 if(Alcancado[V] == NAO){
-
+                    
+                    Alcancado[V] = SIM;                         // Indica que o vertice V foi alcancado.
                     Inserir_Vertice_Fila_(Nao_explorados, V);   // Insere V na fila de vertices nao explorados.
                     break;
                 }
@@ -78,7 +79,7 @@ void Imprimir_Percurso_em_Largura_(Grafo *G, int Raiz){
         }
     }
 
-   Imprimir_Fila_(Explorados); // Imprime o percuro em largura realizado no Grafo.
+   Imprimir_Fila_(Explorados);  // Imprime o percuro em largura realizado no grafo.
    Deletar_Fila_(Explorados);
    Deletar_Fila_(Nao_explorados);
    free(Alcancado);
@@ -148,7 +149,8 @@ int Verificar_Grafo_Bipartido_(Grafo *G, int Raiz){
                 
                 if(Alcancado[V] == NAO){
 
-                    Inserir_Vertice_Fila_(Nao_explorados, V);  // Insere V na fila de vertices nao explorados.
+                    Alcancado[V] = SIM;                         // Indica que o vertice V foi alcancado.
+                    Inserir_Vertice_Fila_(Nao_explorados, V);   // Insere V na fila de vertices nao explorados.
                     break;
                 }
             }
@@ -224,14 +226,16 @@ void Imprimir_Percurso_em_Profundidade_(Grafo *G, int Raiz){
     if(Explorados->Size != G->Qnt_V){
 
         for(int V = 0; V < G->Qnt_V; V++){
-            if(V != Raiz)
+
+            if(Alcancados[V] == NAO)
                 Percurso_em_Profundidade_(G, V, &Alcancados, Explorados);
+            
             if(Explorados->Size == G->Qnt_V)
                 break;
         }
     }
 
-    Imprimir_Fila_(Explorados); // Imprime o percuro em profundidade realizado no Grafo.
+    Imprimir_Fila_(Explorados); // Imprime o percuro em profundidade realizado no grafo.
     Deletar_Fila_(Explorados);
     free(Alcancados);
 }
