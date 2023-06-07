@@ -98,6 +98,19 @@ int    Calcular_Grau_(Grafo *G, int V);
 void   Imprimir_Caminho_(int *Predecessor, int Raiz, int V);
 void   Ordenar_Arestas___Insertion_Sort_(Aresta *Arestas, int Tam);
 
+
+
+/*<<===================================================================================>>*/
+/*<<===========================>>  ARVORE GERADORA MINIMA <<===========================>>*/
+/*<<===================================================================================>>*/
+
+void Union_(int **Predecessores, int V, int W);
+int  FindSet_(int *Predecessor, int V);
+int  FindSet_Otimizado_(int *Predecessores, int V);
+int  *Arvore_Geradora_Minima___PRIM_(Grafo *G, int Raiz);
+int  *Arvore_Geradora_Minima___KRUSKAL_(Grafo *GRAFOS_H);
+int  Encontrar_Menor_Estimativa_(int *Distancias, int *Analisados, int Num_vertices);
+
 #endif
 
 /*<<===================================================================================>>*/
