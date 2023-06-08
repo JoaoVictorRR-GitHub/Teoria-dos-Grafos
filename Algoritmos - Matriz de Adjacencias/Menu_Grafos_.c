@@ -39,7 +39,7 @@
 // Macros.
 #define PARTIDA 0
 #define CHEGADA 1
-#define LIMPAR           printf("\n\n\n\n\n\n\n\n\n");
+#define LIMPAR           printf("\n\n");
 #define GRAFO_CRIADO     printf("|----| [0_0] Grafo criado com sucesso.\n\n");
 #define ARESTA_INSERIDA  printf("|----| [0_0] Aresta inserida com sucesso.\n\n");
 #define ARESTA_REMOVIDA  printf("|----| [0_0] Aresta removida com sucesso.\n\n");
@@ -54,9 +54,8 @@ Grafo *G = NULL;
 /*<<===================================================================================>>*/
 
 /*
-    Funcao responsavel por exibir o menu
-    principal e retornar o valor de uma
-    operacao.
+    Funcao responsavel por exibir o menu principal
+    e retornar o valor de uma operacao.
 */
 int Menu_(){
 
@@ -66,7 +65,6 @@ int Menu_(){
     regcomp(&Numeracao_02, "^[1-7]$", 0);   // Expressao regular (1-7).
 
     do{
-
         printf("\n|----|________________________|");
         printf("\n|----|                        |");
         printf("\n| 01 |  CRIAR GRAFO.          |");
@@ -93,9 +91,8 @@ int Menu_(){
 
 
 /*
-    Funcao responsavel por exibir o menu
-    de algoritmos e retornar o valor de
-    uma operacao.
+    Funcao responsavel por exibir o menu de algoritmos
+    e retornar o valor de uma operacao.
 */
 int Menu_Algoritmos_(){
 
@@ -105,15 +102,14 @@ int Menu_Algoritmos_(){
     regcomp(&Numeracao_02, "^[1-6]$", 0);   // Expressao regular (1-6).
 
     do{
-
         printf("\n|----|________________________________________________________|");
         printf("\n|----|                                                        |");
-        printf("\n| 01 |  IMPRIMIR PERCURSO EM LARGURA.                         |");
-        printf("\n| 02 |  IMPRIMIR PERCURSO EM PROFUNDIDADE.                    |");
-        printf("\n| 03 |  VERIFICAR SE O GRAFO EH BIPARTIDO.                    |");
-        printf("\n| 04 |  IMPRIMIR CAMINHO NA ARVORE GERADORA MINIMA (PRIM).    |");
-        printf("\n| 05 |  IMPRIMIR CAMINHO NA ARVORE GERADORA MINIMA (KRUSKAL). |");
-        printf("\n| 06 |  VOLTAR.                                               |");
+        printf("\n| 01 | IMPRIMIR PERCURSO EM LARGURA.                          |");
+        printf("\n| 02 | IMPRIMIR PERCURSO EM PROFUNDIDADE.                     |");
+        printf("\n| 03 | VERIFICAR SE O GRAFO EH BIPARTIDO.                     |");
+        printf("\n| 04 | IMPRIMIR CAMINHO NA ARVORE GERADORA MINIMA (PRIM).     |");
+        printf("\n| 05 | IMPRIMIR CAMINHO NA ARVORE GERADORA MINIMA (KRUSKAL).  |");
+        printf("\n| 06 | VOLTAR.                                                |");
         printf("\n|----|________________________________________________________|");
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
@@ -282,10 +278,7 @@ int main(){
             break;
             case (ALGORITMOS):
                 
-                if(G && G->Qnt_E){
-                    LIMPAR
-                    Algoritmos_();
-                }
+                if(G && G->Qnt_E) Algoritmos_();
                 else SEM_GRAFO
                 break;
             case (SAIR):
