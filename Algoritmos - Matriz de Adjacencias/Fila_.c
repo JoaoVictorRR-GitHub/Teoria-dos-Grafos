@@ -15,9 +15,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SEM_FILA    printf("\n|----| [0_0] Voce nao tem uma fila.\n");
-#define SEM_VERTICE printf("\n|----| [0_0] Voce nao tem um vertice.\n");
-#define SEM_MEMORIA printf("\n|----| [x_x] Sem memoria disponivel !\n");
+#define SEM_FILA    printf("|----| [0_0] Voce nao tem uma fila.\n");
+#define SEM_VERTICE printf("|----| [0_0] Voce nao tem um vertice.\n");
+#define SEM_MEMORIA printf("|----| [x_x] Sem memoria disponivel !\n");
 
 
 
