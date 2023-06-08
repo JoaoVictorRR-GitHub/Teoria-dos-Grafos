@@ -213,7 +213,7 @@ int *Arvore_Geradora_Minima___KRUSKAL_(Grafo *G){
         int RW = FindSet_Otimizado_(Predecessor, Arestas[i].W); // Encontra a raiz do vertice W.
         
         if(RV != RW)
-            Union_(&Predecessor, RV, RW);   /*=================ERRO========================*/
+            Union_(&Predecessor, RV, RW);
     }
 
     return Predecessor;
@@ -221,13 +221,3 @@ int *Arvore_Geradora_Minima___KRUSKAL_(Grafo *G){
 
 /*<<===================================================================================>>*/
 /*<<===================================================================================>>*/
-
-
-
-
-
-
-
-
-
-
