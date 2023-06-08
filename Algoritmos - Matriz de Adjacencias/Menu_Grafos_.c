@@ -39,10 +39,12 @@
 // Macros.
 #define PARTIDA 0
 #define CHEGADA 1
-#define GRAFO_CRIADO     printf("|----| [0_0] Grafo criado com sucesso.\n");
-#define ARESTA_INSERIDA  printf("|----| [0_0] Aresta inserida com sucesso.\n");
-#define ARESTA_INVALIDA  printf("|----| [x_x] Aresta invalida !\n");
-#define VERTICE_INVALIDO printf("|----| [x_x] Vertice invalido !\n");
+#define LIMPAR           printf("\n\n\n\n\n\n\n\n\n");
+#define GRAFO_CRIADO     printf("|----| [0_0] Grafo criado com sucesso.\n\n");
+#define ARESTA_INSERIDA  printf("|----| [0_0] Aresta inserida com sucesso.\n\n");
+#define ARESTA_REMOVIDA  printf("|----| [0_0] Aresta removida com sucesso.\n\n");
+#define ARESTA_INVALIDA  printf("|----| [x_x] Aresta invalida !\n\n");
+#define VERTICE_INVALIDO printf("|----| [x_x] Vertice invalido !\n\n");
 
 Grafo *G = NULL;
 
@@ -59,7 +61,6 @@ Grafo *G = NULL;
 int Menu_(){
 
     char Entrada[15];
-
     regex_t Numeracao_01, Numeracao_02;
     regcomp(&Numeracao_01, "^0[1-7]$", 0);  // Expressao regular (01-07).
     regcomp(&Numeracao_02, "^[1-7]$", 0);   // Expressao regular (1-7).
@@ -79,8 +80,8 @@ int Menu_(){
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
         scanf("%s", Entrada);
-
     }while(regexec(&Numeracao_01, Entrada, 0, NULL, 0) && regexec(&Numeracao_02, Entrada, 0, NULL, 0));
+    printf("\n");
     
     // Transforma o valor da entrada para inteiro.
     int Operacao = (Entrada[0] -'0');
@@ -99,27 +100,27 @@ int Menu_(){
 int Menu_Algoritmos_(){
 
     char Entrada[15];
-
     regex_t Numeracao_01, Numeracao_02;
     regcomp(&Numeracao_01, "^0[1-6]$", 0);  // Expressao regular (01-06).
     regcomp(&Numeracao_02, "^[1-6]$", 0);   // Expressao regular (1-6).
 
     do{
 
-        printf("\n|----|________________________________________|");
-        printf("\n|----|                                        |");
-        printf("\n| 01 |  IMPRIMIR PERCURSO EM LARGURA.         |");
-        printf("\n| 02 |  IMPRIMIR PERCURSO EM PROFUNDIDADE.    |");
-        printf("\n| 03 |  VERIFICAR SE O GRAFO EH BIPARTIDO.    |");
-        printf("\n| 04 |  ARVORE GERADORA MINIMA (PRIM).        |");
-        printf("\n| 05 |  ARVORE GERADORA MINIMA (KRUSKAL).     |");
-        printf("\n| 06 |  VOLTAR.                               |");
-        printf("\n|----|________________________________________|");
+        printf("\n|----|________________________________________________________|");
+        printf("\n|----|                                                        |");
+        printf("\n| 01 |  IMPRIMIR PERCURSO EM LARGURA.                         |");
+        printf("\n| 02 |  IMPRIMIR PERCURSO EM PROFUNDIDADE.                    |");
+        printf("\n| 03 |  VERIFICAR SE O GRAFO EH BIPARTIDO.                    |");
+        printf("\n| 04 |  IMPRIMIR CAMINHO NA ARVORE GERADORA MINIMA (PRIM).    |");
+        printf("\n| 05 |  IMPRIMIR CAMINHO NA ARVORE GERADORA MINIMA (KRUSKAL). |");
+        printf("\n| 06 |  VOLTAR.                                               |");
+        printf("\n|----|________________________________________________________|");
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
         scanf("%s", Entrada);
     }while(regexec(&Numeracao_01, Entrada, 0, NULL, 0) && regexec(&Numeracao_02, Entrada, 0, NULL, 0));
-    
+    printf("\n");
+
     // Transforma o valor da entrada para inteiro.
     int Operacao = (Entrada[0] -'0');
     if(!Operacao)
@@ -140,8 +141,8 @@ int Escolher_Vertice_(int Direcao){
     // Loop: Escolher vertice.
     while(1){
         
-        if(Direcao == PARTIDA) printf("\n|----| Insira o vertice de partida: ");
-        if(Direcao == CHEGADA) printf("|----| Insira o vertice de chegada: ");
+        if(Direcao == PARTIDA) printf("|----| Insira o vertice de partida:\t");
+        if(Direcao == CHEGADA) printf("|----| Insira o vertice de chegada:\t");
         scanf("%d", &Vert);
 
         // Verifica se o vertice existe no grafo.
@@ -166,10 +167,9 @@ void Algoritmos_(){
 
     int V, W;
     int Operacao;
-    int *Predecessor;
+    int *Predecessor = NULL;
 
     do{
-
         Operacao = Menu_Algoritmos_();  // Operacao escolhida.
 
         switch(Operacao){
@@ -177,35 +177,42 @@ void Algoritmos_(){
 
                 V = Escolher_Vertice_(PARTIDA);
                 Imprimir_Percurso_em_Largura_(G, V);
-                break;
+            break;
             case (PROFUNDIDADE):
 
                 V = Escolher_Vertice_(PARTIDA);
                 Imprimir_Percurso_em_Profundidade_(G, V);
-                break;
+            break;
             case (BIPARTIDO):
 
-                V = Escolher_Vertice_(PARTIDA);
                 if(Verificar_Grafo_Bipartido_(G, V)) printf("|----| SIM.");
                 else                                 printf("|----| NAO.");
-                break;
+            break;
             case (PRIM):
 
                 V = Escolher_Vertice_(PARTIDA);
                 W = Escolher_Vertice_(CHEGADA);
+
                 Predecessor = Arvore_Geradora_Minima___PRIM_(G, V);
                 Imprimir_Caminho_(Predecessor, V, W);
-                break;
+
+                free(Predecessor); Predecessor = NULL;
+            break;
             case (KRUSKAL):
 
-                V = Escolher_Vertice_(PARTIDA);
-                W = Escolher_Vertice_(CHEGADA);
                 Predecessor = Arvore_Geradora_Minima___KRUSKAL_(G);
-                Imprimir_Caminho_(Predecessor, V, W);
-                break;
+
+                // Loop: Imprimir arvore geradora minima (KRUSKAL).
+                for(int i = 0; i < G->Qnt_V; i++){
+                    if(Predecessor[i] < 0) printf("\n|----| Raiz:   %d", i+1);
+                    else                   printf("\n|----| Aresta: (%d, %d)", i+1, Predecessor[i]+1);
+                }
+
+                free(Predecessor); Predecessor = NULL;
+            break;
         }
 
-        printf("\n\n\n");
+        LIMPAR
     }while(Operacao != VOLTAR);
 }
 
@@ -228,74 +235,67 @@ int main(){
             case (CRIAR):
 
                 Deletar_Grafo_(G);
-                printf("\n|----| Insira a quantidade de vertices:   ");     scanf("%d", &N);
+                printf("|----| Insira a quantidade de vertices:\t"); scanf("%d", &N);
                 G = Criar_Grafo_(N);
                 if(G) GRAFO_CRIADO
-                break;
+            break;
             case (INSERIR):
 
                 if(G){
-                    
-                    printf("\n|----| Informe a quantidade de arestas:   "); scanf("%d", &M);
+                    printf("|----| Informe a quantidade de arestas:\t"); scanf("%d", &M);
 
                     // Loop: Inserir arestas.
-                    int i = 0;
-                    while(i < M){
-                        printf("\n|----|--------------------------------------|\n");
-                        printf("|----| Indique o vertice de partida:    "); scanf("%d", &V);
-                        printf("|----| Indique o vertice de chegada:    "); scanf("%d", &W);
-                        printf("|----| Indique o peso da aresta:        "); scanf("%d", &Peso);
-                        
-                        // Verifica se os vertices existem no grafo.
-                        if((V > 0) && (V <= G->Qnt_V) && (W > 0) && (W <= G->Qnt_V)){
-                            
-                            i++;
-                            if(!Verificar_Adjacencia_(G, V-1, W-1)){
-                                Inserir_Aresta_(G, V-1, W-1, Peso);
-                                ARESTA_INSERIDA
-                            }
-                        }
-                        else ARESTA_INVALIDA
+                    for(int i = 0; i < M; i++){
+
+                        printf("|----|--------------------------------------|\n");
+                        V = Escolher_Vertice_(PARTIDA);
+                        W = Escolher_Vertice_(CHEGADA);
+                        printf("|----| Indique o peso da aresta:\t"); scanf("%d", &Peso);
+
+                        Inserir_Aresta_(G, V, W, Peso); // Aresta (V, W).
+                        Inserir_Aresta_(G, W, V, Peso); // Aresta (W, V).
+                        ARESTA_INSERIDA
                     }
                 }
                 else SEM_GRAFO
-                break;
+            break;
             case (IMPRIMIR):
             
                 Imprimir_Grafo_(G);
-                break;
+            break;
             case (REMOVER):
 
                 if(G){
-                    
                     V = Escolher_Vertice_(PARTIDA);
                     W = Escolher_Vertice_(CHEGADA);
 
-                    if(Verificar_Adjacencia_(G, V, W)){
-                        Remover_Aresta_(G, V, W);
-                        printf("|----| [0_0] Aresta removida com sucesso !\n");
-                    }
+                    Remover_Aresta_(G, V, W);   // Aresta (V, W).
+                    Remover_Aresta_(G, W, V);   // Aresta (W, V).
+                    ARESTA_REMOVIDA
                 }
                 else SEM_GRAFO
-                break;
+            break;
             case (DELETAR):
 
                 Deletar_Grafo_(G);
                 G = NULL;
-                break;
+            break;
             case (ALGORITMOS):
                 
-                if(G && G->Qnt_E) Algoritmos_();
+                if(G && G->Qnt_E){
+                    LIMPAR
+                    Algoritmos_();
+                }
                 else SEM_GRAFO
                 break;
             case (SAIR):
 
                 Deletar_Grafo_(G);
                 printf("|----| [0_0] Ta baum entao... Tchau.\n");
-                break;
+            break;
         }
         
-        printf("\n\n\n");
+        LIMPAR
     }while(Operacao != SAIR);
 
     return 0;
