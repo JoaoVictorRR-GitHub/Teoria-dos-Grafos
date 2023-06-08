@@ -121,8 +121,8 @@ int *Arvore_Geradora_Minima___PRIM_(Grafo *G, int Raiz){
 /*<<===================================================================================>>*/
 
 /*
-    Metodo auxiliar do algoritmo de KRUSKAL responsavel por
-    explorar os predecessores de um vertice ate encontrar
+    Metodo auxiliar do algoritmo de KRUSKAL responsavel por explorar os
+    predecessores de um vertice na arvore geradora minima ate encontrar
     o vertice que eh a raiz do conjunto.
 
     @ Entrada:
@@ -154,9 +154,9 @@ int FindSet_Otimizado_(int *Predecessor, int V){
 
 
 /*
-    Metodo auxiliar do algoritmo de KRUSKAL responsavel
-    por criar um conjunto unindo dois vertices por meio
-    de seus predecessores.
+    Metodo auxiliar do algoritmo de KRUSKAL responsavel por
+    unir dois conjuntos atraves das raizes de dois vertices
+    na arvore geradora minima.
 
     @ Entrada:
     + Vetor com os predecessores de cada vertice [ PREDECESSOR ].
@@ -215,7 +215,7 @@ int *Arvore_Geradora_Minima___KRUSKAL_(Grafo *G){
         int RW = FindSet_Otimizado_(Predecessor, Arestas[i].W); // Encontra a raiz do vertice W.
         
         if(RV != RW)
-            Union_(&Predecessor, RV, RW);   /*=================ERRO========================*/
+            Union_(&Predecessor, RV, RW);
     }
 
     return Predecessor;
