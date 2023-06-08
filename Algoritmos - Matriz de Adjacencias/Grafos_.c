@@ -81,9 +81,8 @@ Grafo *Criar_Grafo_(int N){
 void Inserir_Aresta_(Grafo *G, int V, int W, int Peso){
 
     if(G){
-        G->Adj[V][W] = Peso;    // Insere a aresta (V, W).
-        G->Adj[W][V] = Peso;    // Insere a aresta (W, V).
-        G->Qnt_E++;             // Atualiza a quantidade de arestas.
+        if(G->Adj[V][W] == SEM_ARESTA) G->Qnt_E++;  // Atualiza a quantidade de arestas.
+        G->Adj[V][W] = Peso;                        // Insere a aresta (V, W).
     }
     else SEM_GRAFO
 }
@@ -104,9 +103,8 @@ void Inserir_Aresta_(Grafo *G, int V, int W, int Peso){
 void Remover_Aresta_(Grafo *G, int V, int W){
 
     if(G){
-        G->Qnt_E--;                 // Atualiza a quantidade de arestas.
-        G->Adj[V][W] = SEM_ARESTA;  // Remove a aresta (V, W).
-        G->Adj[W][V] = SEM_ARESTA;  // Remove a aresta (W, V).
+        if(G->Adj[V][W] != SEM_ARESTA) G->Qnt_E--;  // Atualiza a quantidade de arestas.
+        G->Adj[V][W] = SEM_ARESTA;                  // Remove a aresta (V, W).
     }
     else SEM_GRAFO
 }
