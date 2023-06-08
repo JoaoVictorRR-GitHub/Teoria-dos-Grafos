@@ -1,4 +1,4 @@
-# | $\textcolor{Red}{\text{Teoria dos Grafos}}$a
+# | $\textcolor{Red}{\text{Teoria dos Grafos}}$
 
 <p align = "justify">
   Resumo sobre os principais assuntos abordados na disciplina de teoria dos grafos e repositório dos algoritmos utilizados para resolução de problemas com grafos,
