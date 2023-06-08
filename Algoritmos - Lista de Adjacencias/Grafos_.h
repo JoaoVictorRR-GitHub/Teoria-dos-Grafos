@@ -9,9 +9,9 @@
 #define NAO         0           // False.
 #define SEM_ARESTA  0
 #define INFINITO    INT_MAX/2   // Valor maximo.
-#define SEM_FILA    printf("\n|----| [0_0] Voce nao tem uma fila.\n");
-#define SEM_GRAFO   printf("\n|----| [0_0] Voce nao tem um grafo.\n");
-#define SEM_MEMORIA printf("\n|----| [x_x] Sem memoria disponivel !\n");
+#define SEM_FILA    printf("|----| [0_0] Voce nao tem uma fila.\n");
+#define SEM_GRAFO   printf("|----| [0_0] Voce nao tem um grafo.\n");
+#define SEM_MEMORIA printf("|----| [x_x] Sem memoria disponivel !\n");
 
 
 
