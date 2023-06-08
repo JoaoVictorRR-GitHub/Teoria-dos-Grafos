@@ -17,7 +17,7 @@
 #include "Grafos_.c"
 #include "Percursos_.c"
 #include "Utilitarios_.c"
-// #include "Arvore_Geradora_.c"
+#include "Arvore_Geradora_.c"
 
 // Menu principal.
 #define CRIAR 1
@@ -52,9 +52,8 @@ Grafo *G = NULL;
 /*<<===================================================================================>>*/
 
 /*
-    Funcao responsavel por exibir o menu
-    principal e retornar o valor de uma
-    operacao.
+    Funcao responsavel por exibir o menu principal
+    e retornar o valor de uma operacao.
 */
 int Menu_(){
 
@@ -79,7 +78,6 @@ int Menu_(){
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
         scanf("%s", Entrada);
-
     }while(regexec(&Numeracao_01, Entrada, 0, NULL, 0) && regexec(&Numeracao_02, Entrada, 0, NULL, 0));
     
     // Transforma o valor da entrada para inteiro.
@@ -92,9 +90,8 @@ int Menu_(){
 
 
 /*
-    Funcao responsavel por exibir o menu
-    de algoritmos e retornar o valor de
-    uma operacao.
+    Funcao responsavel por exibir o menu de algoritmos
+    e retornar o valor de uma operacao.
 */
 int Menu_Algoritmos_(){
 
@@ -106,15 +103,15 @@ int Menu_Algoritmos_(){
 
     do{
 
-        printf("\n|----|________________________________________|");
-        printf("\n|----|                                        |");
-        printf("\n| 01 |  IMPRIMIR PERCURSO EM LARGURA.         |");
-        printf("\n| 02 |  IMPRIMIR PERCURSO EM PROFUNDIDADE.    |");
-        printf("\n| 03 |  VERIFICAR SE O GRAFO EH BIPARTIDO.    |");
-        printf("\n| 04 |  ARVORE GERADORA MINIMA (PRIM).        |");
-        printf("\n| 05 |  ARVORE GERADORA MINIMA (KRUSKAL).     |");
-        printf("\n| 06 |  VOLTAR.                               |");
-        printf("\n|----|________________________________________|");
+        printf("\n|----|________________________________________________________|");
+        printf("\n|----|                                                        |");
+        printf("\n| 01 |  IMPRIMIR PERCURSO EM LARGURA.                         |");
+        printf("\n| 02 |  IMPRIMIR PERCURSO EM PROFUNDIDADE.                    |");
+        printf("\n| 03 |  VERIFICAR SE O GRAFO EH BIPARTIDO.                    |");
+        printf("\n| 04 |  IMPRIMIR CAMINHO NA ARVORE GERADORA MINIMA (PRIM).    |");
+        printf("\n| 05 |  IMPRIMIR CAMINHO NA ARVORE GERADORA MINIMA (KRUSKAL). |");
+        printf("\n| 06 |  VOLTAR.                                               |");
+        printf("\n|----|________________________________________________________|");
         printf("\n|----| SELECIONE UMA OPCAO: ");
 
         scanf("%s", Entrada);
@@ -169,7 +166,6 @@ void Algoritmos_(){
     int *Predecessor;
 
     do{
-
         Operacao = Menu_Algoritmos_();  // Operacao escolhida.
 
         switch(Operacao){
@@ -177,32 +173,33 @@ void Algoritmos_(){
 
                 V = Escolher_Vertice_(PARTIDA);
                 Imprimir_Percurso_em_Largura_(G, V);
-                break;
+            break;
             case (PROFUNDIDADE):
 
                 V = Escolher_Vertice_(PARTIDA);
                 Imprimir_Percurso_em_Profundidade_(G, V);
-                break;
+            break;
             case (BIPARTIDO):
 
-                V = Escolher_Vertice_(PARTIDA);
                 if(Verificar_Grafo_Bipartido_(G, V)) printf("|----| SIM.");
                 else                                 printf("|----| NAO.");
-                break;
+            break;
             case (PRIM):
 
                 V = Escolher_Vertice_(PARTIDA);
                 W = Escolher_Vertice_(CHEGADA);
-                // Predecessor = Arvore_Geradora_Minima___PRIM_(G, V);
-                // Imprimir_Caminho_(Predecessor, V, W);
-                break;
+                Predecessor = Arvore_Geradora_Minima___PRIM_(G, V);
+                Imprimir_Caminho_(Predecessor, V, W);
+            break;
             case (KRUSKAL):
 
-                V = Escolher_Vertice_(PARTIDA);
-                W = Escolher_Vertice_(CHEGADA);
-                // Predecessor = Arvore_Geradora_Minima___KRUSKAL_(G);
-                // Imprimir_Caminho_(Predecessor, V, W);
-                break;
+                Predecessor = Arvore_Geradora_Minima___KRUSKAL_(G);
+
+                for(int i = 0; i < G->Qnt_V; i++){
+                    if(Predecessor[i] < 0) printf("\n|----| Raiz:   %d", i+1);
+                    else                   printf("\n|----| Aresta: (%d, %d)", i+1, Predecessor[i]+1);
+                }
+            break;
         }
 
         printf("\n\n\n");
@@ -231,7 +228,7 @@ int main(){
                 printf("\n|----| Insira a quantidade de vertices:   ");     scanf("%d", &N);
                 G = Criar_Grafo_(N);
                 if(G) GRAFO_CRIADO
-                break;
+            break;
             case (INSERIR):
 
                 if(G){
@@ -250,19 +247,19 @@ int main(){
                         if((V > 0) && (V <= G->Qnt_V) && (W > 0) && (W <= G->Qnt_V)){
                             
                             i++;
-                            Inserir_Aresta_(G, V-1, W-1, Peso);
-                            Inserir_Aresta_(G, W-1, V-1, Peso);
+                            Inserir_Aresta_(G, V-1, W-1, Peso); // Aresta (V, W).
+                            Inserir_Aresta_(G, W-1, V-1, Peso); // Aresta (W, V).
                             ARESTA_INSERIDA
                         }
                         else ARESTA_INVALIDA
                     }
                 }
                 else SEM_GRAFO
-                break;
+            break;
             case (IMPRIMIR):
             
                 Imprimir_Grafo_(G);
-                break;
+            break;
             case (REMOVER):
 
                 if(G){
@@ -275,22 +272,22 @@ int main(){
                     printf("|----| [0_0] Aresta removida com sucesso !\n");
                 }
                 else SEM_GRAFO
-                break;
+            break;
             case (DELETAR):
 
                 Deletar_Grafo_(G);
                 G = NULL;
-                break;
+            break;
             case (ALGORITMOS):
                 
                 if(G && G->Qnt_E) Algoritmos_();
                 else SEM_GRAFO
-                break;
+            break;
             case (SAIR):
 
                 Deletar_Grafo_(G);
                 printf("|----| [0_0] Ta baum entao... Tchau.\n");
-                break;
+            break;
         }
         
         printf("\n\n\n");
