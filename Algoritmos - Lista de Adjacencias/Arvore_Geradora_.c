@@ -101,8 +101,8 @@ int *Arvore_Geradora_Minima___PRIM_(Grafo *G, int Raiz){
             // Compara a estimativa de distancia do vertice com o peso da aresta.
             if((Analisado[W->No] == NAO) && (W->No < Distancias[W->No])){
 
-                Distancias[W->No]  = W->No; // Atualiza a estimativa da distancia de W com o peso da aresta.
-                Predecessor[W->No] = Raiz;  // Indica que a raiz eh o predecessor de W na arvore.
+                Distancias[W->No]  = W->Peso;   // Atualiza a estimativa da distancia de W com o peso da aresta.
+                Predecessor[W->No] = Raiz;      // Indica que a raiz eh o predecessor de W na arvore.
             }
 
             W = W->Prox;
