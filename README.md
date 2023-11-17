@@ -7,11 +7,15 @@
 
 
 ## | $\textcolor{RedOrange}{\text{ALGORITMOS - Matriz de Adjacências:}}$
-> Implementação em linguagem <b>C</b> e <b>C++</b> dos algoritmos para resolução de problemas com grafos usando matriz de adjacências.
+<p align = "justify">
+  Implementação em linguagem <b>C</b> e <b>C++</b> dos algoritmos para resolução de problemas com grafos usando matriz de adjacências.
+</p>
 
 
 ## | $\textcolor{RedOrange}{\text{ALGORITMOS - Lista de Adjacências:}}$
-> Implementação em linguagem <b>C</b> e <b>C++</b> dos algoritmos para resolução de problemas com grafos usando lista de adjacências.
+<p align = "justify">
+  Implementação em linguagem <b>C</b> e <b>C++</b> dos algoritmos para resolução de problemas com grafos usando lista de adjacências.
+</p>
 
 
 ## | $\textcolor{YellowOrange}{\text{ALGORITMOS IMPLEMENTADOS:}}$
